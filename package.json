@@ -1,12 +1,13 @@
 {
-  "name": "Frontend Mentor - Rest Countries - Coded by FALLD",
+  "name": "frontendmentor-restcountries",
   "version": "1.0.0",
   "description": "Frontend challenge by Frontend Mentor, realized by FALLD.",
   "private": false,
   "main": "index.js",
   "scripts": {
     "dev": "webpack serve --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js",
+    "build-clean": "webpack --config webpack.clean.js"
   },
   "keywords": [],
   "author": "",
