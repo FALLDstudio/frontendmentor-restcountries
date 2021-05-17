@@ -7,7 +7,12 @@ module.exports = {
         rules : [
             {
                 test : /\.html$/,
-                loader : 'html-loader'
+                use : [{
+                    loader : 'html-loader',
+                    options : {
+                        minimize : false
+                    }
+                }]
             },
             {
                 test : /\.(svg|png|jpe?g|webp|gif)$/,
