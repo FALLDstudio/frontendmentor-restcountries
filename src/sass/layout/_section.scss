@@ -1,0 +1,31 @@
+@use '../abstracts/variable' as *;
+
+.l-countries{
+    overflow-y: scroll;
+    padding: 0 $side-padding;
+
+}
+
+.countries__margin{
+    margin: -($inter-padding - 1.2rem);
+    padding-bottom: 10rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+/*.countries__margin{
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(35vh, 1fr));
+    
+}*/
+
+
+.countries__overflow{
+    overflow : hidden;
+    min-height: 100%;
+    margin: -0.2rem;
+}

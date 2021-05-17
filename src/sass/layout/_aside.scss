@@ -1,0 +1,42 @@
+@use '../abstracts/map' as *;
+@use '../abstracts/variable' as *;
+
+.message, .l-country-details[data-scrollbar]{
+    position: absolute;
+    width: 100%;
+    display: none;
+    left: 0;
+}
+
+.message{
+    top: 0;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: map-get($color, light-mode, light-grey);
+
+    p:nth-of-type(1){
+        margin-top: 2rem;
+    }
+}
+
+.l-country-details{
+    height: calc(100vh - 4rem);
+    bottom: 0;
+    overflow: hidden;
+}
+
+.country-details__content{
+    padding: 3rem $side-padding;
+    margin-bottom: $side-padding;
+}
+
+.country-details__main{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+

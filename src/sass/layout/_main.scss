@@ -1,0 +1,8 @@
+@use '../abstracts/variable' as *;
+
+.app-content__static{
+    padding-bottom: $inter-padding;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 4rem);
+}

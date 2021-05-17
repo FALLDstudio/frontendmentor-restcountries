@@ -1,0 +1,47 @@
+{
+  "name": "Frontend Mentor - Rest Countries - Coded by FALLD",
+  "version": "1.0.0",
+  "description": "Frontend challenge by Frontend Mentor, realized by FALLD.",
+  "private": false,
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack serve --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.14.1",
+    "autoprefixer": "^10.2.5",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.4",
+    "css-minimizer-webpack-plugin": "^2.0.0",
+    "file-loader": "^6.2.0",
+    "html-loader": "^2.1.2",
+    "html-webpack-plugin": "^5.3.1",
+    "mini-css-extract-plugin": "^1.5.0",
+    "node-sass": "^5.0.0",
+    "postcss-loader": "^5.2.0",
+    "postcss-preset-env": "^6.7.0",
+    "sass": "^1.32.11",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.37.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
+  },
+  "dependencies": {
+    "canvg": "^3.0.7",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "gsap": "^3.6.1",
+    "smooth-scrollbar": "^8.6.1"
+  },
+  "browserslist": [
+    "last 5 years",
+    ">1%",
+    "not dead"
+  ]
+}

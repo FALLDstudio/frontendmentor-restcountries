@@ -1,0 +1,20 @@
+@use '../abstracts/map' as *;
+@use '../abstracts/variable' as *;
+
+.l-app-header{
+    height: 4rem;
+    padding: 0 $side-padding;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 !important;
+}
+
+.l-search-tools{
+    
+    padding: 0 $side-padding;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
