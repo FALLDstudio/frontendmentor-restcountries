@@ -21,7 +21,7 @@ export default function getData(){
         xhr.addEventListener('error',function(){
             if(this.readyState !== 4) error('Unable to get countries data');
         })
-        xhr.open('GET', 'https://restcountries.eu/rest/v2/all/', true);
+        xhr.open('GET', 'https://restcountries.com/v3.1/all', true);
         xhr.responseType = "json";
         xhr.send();
     });
