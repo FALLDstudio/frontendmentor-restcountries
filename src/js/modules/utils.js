@@ -10,8 +10,6 @@ import {
     assetsCount
 } from './dom-variables';
 
-let newSize = 500;
-
 export function getIMG(countries){
 
     return new Promise(resolve=>{
@@ -33,126 +31,34 @@ export function getIMG(countries){
             };
         })();
 
-        let canvas, ctx;
-
-        let testCanvas = typeof OffscreenCanvas !== 'undefined' || !!document.createElement('canvas').getContext;
-
-        if(testCanvas){
-            loadingState.innerText = 'Optimizing pictures for better user experience...';
-            assetsCount.querySelector('span:nth-child(1)').innerText = 0; 
-            assetsCount.querySelector('span:nth-child(2)').innerText = '%'; 
-        }else{
-            loadingState.innerText = 'Unable to optimize pictures, loading vector graphics...'
-        }
-
+        loadingState.innerText = 'Loading assets...';
+        assetsCount.querySelector('span:nth-child(1)').innerText = 0; 
+        assetsCount.querySelector('span:nth-child(2)').innerText = '%'; 
+  
         function get(index){
 
             return new Promise(success=>{
 
-                let img = new Image();
-                let svgData, pngUrl;
-
-                if(testCanvas){
-
-                    function saveIMG(elt){
-                        flags[index] = elt;
-                        success(index + 1);
-                    };
-
-                    async function getSize(){
-
-                        this.removeEventListener('load',getSize);
-                        const width = this.width;
-                        const height = this.height;
-
-                        if(!svgData.includes('viewBox')){
-                            let i = svgData.search(/<svg/);
-                            let vb = ` viewBox="0 0 ${width} ${height}" `;
-                            svgData = svgData.slice(0, i + 4) + vb + svgData.slice(i + 4, svgData.length);
-                        }
-
-                        if(typeof OffscreenCanvas !== 'undefined'){
-
-                            if(typeof canvas === 'undefined'){
-                                canvas = new OffscreenCanvas(width, height);
-                                ctx = canvas.getContext('2d');
-                            }else{
-                                canvas.width = width;
-                                canvas.height = height;
-                            }
-    
-                            const v = await Canvg.from(ctx, svgData, presets.offscreen());
-    
-                            v.resize(newSize, Math.round((height/width) * newSize), 'xMidYMid meet');
-    
-                            await v.render();
-    
-                            const blob = await canvas.convertToBlob();
-                            pngUrl = URL.createObjectURL(blob);
-
-                        }else{
-
-                            let domCanvas = document.querySelector('canvas');
-                            if(domCanvas === null){
-                                canvas = document.createElement('canvas');
-                                canvas.style.display = 'none';
-                                ctx = canvas.getContext('2d');
-                                document.documentElement.appendChild(canvas);
-                            }
-                            canvas.width = width;
-                            canvas.height = height;
-    
-                            const v = await Canvg.from(ctx, svgData);
-    
-                            v.resize(newSize, Math.round((height/width) * newSize), 'xMidYMid meet');
-    
-                            await v.render();
-    
-                            pngUrl = canvas.toDataURL('image/png');
-                        }
-
-                        this.addEventListener('load', ()=>{
-                            saveIMG(this);
-                        });
-
-                        this.src = pngUrl;
-                    };
-
                     let xhr = new XMLHttpRequest();
-                    xhr.open('GET', countries[index].flag)
+                    xhr.open('GET', countries[index].flags.png)
                     xhr.addEventListener('readystatechange', function(){
 
                         if(this.readyState === 4 && this.status === 200){
-                            svgData = this.response
-                            .replace(/<!DOCTYPE(.*?)>/,'')
-                            .replace(/<!--(.*?)-->/,'')
 
-                            img.addEventListener('load',getSize);
-
-                            img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)))
-
+                            let img = new Image();
+                            let src = URL.createObjectURL(this.response);
+                            img.src = src;
+                            success(img);
                         }
                         
                     });
-                    xhr.responseType = 'text';
+                    xhr.responseType = "blob";
                     xhr.send();
 
-                }else{
-
-                    function loadHandler(){
-                        flags[index] = img;
-                        success();
-                    };
-
-                    img.addEventListener('load', loadHandler);
-
-                    img.src = countries[index].flag;
-
-                };
+              
             });
         };
 
-        let flags = [];
         let promises = [];
         let loadedAssets = 0;
 
@@ -167,14 +73,8 @@ export function getIMG(countries){
         
         Promise.all(promises)
         .then(v=>{
-            console.log(v)
-            return Promise.all(v)
-        })
-        .then(()=>{
-            resolve(flags);
+            resolve(v);
         });
-
-
     });
 };
 
@@ -287,6 +187,8 @@ export const setSelectedRegion = function(elt){
 };
 
 export const resizeCountriesElt = function(elt){
+
+    console.log(countriesContainer.firstElementChild)
 
     let ref = countriesContainer.firstElementChild.offsetWidth, arr;
 

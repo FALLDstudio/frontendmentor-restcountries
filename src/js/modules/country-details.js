@@ -31,32 +31,34 @@ export const countryDetails = {
 
         mainContent.style.pointerEvents = 'none';
 
-        name.textContent = countries[index].name;
-        native.textContent = countries[index].nativeName;
+        name.textContent = countries[index].name.common;
+        native.textContent = Object.values(countries[index].name.nativeName)[0].common;
         pop.textContent = spaceNumber(countries[index].population);
         region.textContent = countries[index].region;
         subRegion.textContent = countries[index].subregion;
         capital.textContent = countries[index].capital;
         curr.textContent = lang.textContent = domain.textContent = '';
         
-        countries[index].topLevelDomain.forEach((c,i)=>{
+        countries[index].tld.forEach((c,i)=>{
             domain.textContent += c;
-            if(countries[index].topLevelDomain.length > 1 && i < countries[index].topLevelDomain.length - 1) domain.textContent += ', ';
+            if(countries[index].tld.length > 1 && i < countries[index].tld.length - 1) domain.textContent += ', ';
         });
 
-        countries[index].currencies.forEach((c,i)=>{
-            if(c.code !== '(none)'){
-                curr.textContent += c.code;
-                if(countries[index].currencies.length > 1 && i < countries[index].currencies.length - 1 && countries[index].currencies[i+1].code !== '(none)') curr.textContent += ', ';
-            }
+        let currCodes = Object.keys(countries[index].currencies);
+
+        currCodes.forEach((c,i)=>{
+            curr.textContent += c;
+            if(currCodes.length > 1 && i < currCodes.length - 1) curr.textContent += ', ';
         });
 
-        countries[index].languages.forEach((c,i)=>{
-            lang.textContent += c.name;
-            if(countries[index].languages.length > 1 && i < countries[index].languages.length - 1) lang.textContent += ', ';
+        let languages = Object.values(countries[index].languages);
+
+        languages.forEach((c,i)=>{
+            lang.textContent += c;
+            if(languages.length > 1 && i < languages.length - 1) lang.textContent += ', ';
         });
 
-        if(countries[index].borders.length > 0){
+        if(countries[index].hasOwnProperty("borders") && countries[index].borders.length > 0){
 
             border.parentElement.style.removeProperty('display');
 
@@ -64,15 +66,9 @@ export const countryDetails = {
                 let div = document.createElement('div');
                 div.classList.add('card');
                 let p = document.createElement('p');
-                let borderCountry = countries.find(c=> c.alpha3Code === b);
-                let str = borderCountry.name;
-
-                if(str === 'Congo (Democratic Republic of the)'){
-                    p.textContent = 'Congo (RD)';
-                }else{
-                    p.textContent = str.replace(/\((.*?)\)/,'').trim();
-                }
-
+                let borderCountry = countries.find(c=> c.cca3 === b);
+                p.textContent = borderCountry.name.common;
+            
                 div.appendChild(p);
                 border.appendChild(div);
             });

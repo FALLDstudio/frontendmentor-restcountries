@@ -23,8 +23,6 @@ export default function insertCountries({
 
         while(i < arr.length && createdLines < lines){
 
-            if(countries[arr[i]].name.includes('United Kingdom')) countries[arr[i]].name = 'United Kingdom';
-
             countriesContainer.insertAdjacentHTML('beforeend',
                 `<div class="countries__module__container" data-index="${arr[i]}">
                     <svg class="countries__module card pointer" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid meet">
@@ -32,7 +30,7 @@ export default function insertCountries({
                             <figure>
                                 <div class="countries__module__img"></div>
                                 <figcaption class="countries__module__descr">
-                                    <h3 class="countries__module__title">${countries[arr[i]].name}</h3>
+                                    <h3 class="countries__module__title">${countries[arr[i]].name.common}</h3>
                                     <div>
                                         <h4>Population : </h4>
                                         <p>${spaceNumber(countries[arr[i]].population)}</p>
@@ -51,7 +49,7 @@ export default function insertCountries({
                     </svg>
                 </div>`
             );
-
+            
             let current = document.querySelector(`.countries__module__container[data-index="${arr[i]}"]`);
             current.querySelector('.countries__module__img').append(flags[arr[i]]);
             current.addEventListener('click', function(){

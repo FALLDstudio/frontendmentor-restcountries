@@ -10,7 +10,7 @@ export default function filterCountries({
 
         let inclRegion;
 
-        let inclSearch = c.name.toLowerCase().includes(searchStr.toLowerCase());
+        let inclSearch = c.name.common.toLowerCase().includes(searchStr.toLowerCase());
 
         if(regionStr !== 'Clear'){
             if(c.region === regionStr) inclRegion = true;

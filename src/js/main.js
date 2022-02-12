@@ -68,14 +68,13 @@ export default function run() {
         getData()
         .then(v=>{
 
-            let domCanvas = document.querySelector('canvas');
-            if(domCanvas !== null) domCanvas.remove();
             loadOptions.countries = Countries = v.countries;
             loadOptions.flags = v.flags;
 
             insertCountries(loadOptions)
             .then(()=>{
                 loadingState.innerText = 'Success !';
+                window.addEventListener('resize', resizeCountriesElt);
                 setTimeout(() => {
                     loadingColorSwap.stop();
                     document.body.classList.remove('boot');
@@ -143,8 +142,6 @@ export default function run() {
             setRegionMenu.close();
         };
     });
-
-    window.addEventListener('resize', resizeCountriesElt);
 
     const options = filterOptions.querySelectorAll('.search-tools__filter__option');
 
