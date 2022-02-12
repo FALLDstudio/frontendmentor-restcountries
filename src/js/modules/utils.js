@@ -1,4 +1,3 @@
-import Canvg, { presets } from 'canvg';
 import gsap from 'gsap';
 import { 
     circles, 
