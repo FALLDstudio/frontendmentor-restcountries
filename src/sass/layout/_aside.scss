@@ -25,6 +25,7 @@
     height: calc(100vh - 4rem);
     bottom: 0;
     overflow: hidden;
+    background-color: map-get($color, light-mode, light-grey);
 }
 
 .country-details__content{

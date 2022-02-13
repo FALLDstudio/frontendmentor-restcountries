@@ -4,6 +4,10 @@ body.dark-theme{
 
     background-color: map-get($color, dark-mode, dark-blue);
 
+    .l-country-details{
+        background-color: map-get($color, dark-mode, dark-blue);
+    }
+
     .search-tools__search-bar input,
     .search-tools__filter__options-container > div,
     .card{

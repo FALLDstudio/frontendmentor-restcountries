@@ -38,11 +38,16 @@ export default function insertCountries({
                                     <div>
                                         <h4>Region : </h4>
                                         <p>${countries[arr[i]].region}</p>
-                                    </div>
-                                    <div>
-                                        <h4>Capital : </h4>
-                                        <p>${countries[arr[i]].capital}</p>
-                                    </div>
+                                    </div>`
+                                    + (countries[arr[i]].hasOwnProperty("capital") ? 
+                                        `
+                                        <div>
+                                            <h4>Capital : </h4>
+                                            <p>${countries[arr[i]].capital}</p>
+                                        </div>
+                                        `
+                                    : '') +
+                                    `
                                 </figcaption>
                             </figure>
                         </foreignObject>
