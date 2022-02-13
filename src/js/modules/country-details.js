@@ -104,6 +104,8 @@ export const countryDetails = {
             border.parentElement.style.display = 'none';
         }
 
+        let desktop = !window.matchMedia("only screen and (max-width : 1300px)").matches;
+
         gsap.fromTo(detailsContainer,
             {
                 opacity: 0
@@ -117,24 +119,28 @@ export const countryDetails = {
     
         gsap.fromTo(detailsIMG,
             {
-                y : window.innerHeight - detailsIMG.offsetTop
+                y : desktop ? window.innerHeight - detailsIMG.offsetTop : 0,
+                x : desktop ? 0 : window.innerWidth - detailsIMG.offsetLeft
             },
             {
                 duration : 0.8,
                 delay: 0.15,
                 y : 0,
+                x : 0,
                 ease : 'power4.out'
             }
         );
     
         gsap.fromTo(detailsTXT,
             {
-                x : window.innerWidth - detailsTXT.offsetLeft
+                x : desktop ? window.innerWidth - detailsTXT.offsetLeft : 0,
+                y : desktop ? 0 : window.innerHeight - detailsTXT.offsetTop
             },
             {
                 duration : 0.8,
                 delay: 0.15,
                 x : 0,
+                y : 0,
                 ease : 'power4.out'
             }
         );
@@ -156,6 +162,8 @@ export const countryDetails = {
 
     close : function(){
 
+        let desktop = !window.matchMedia("only screen and (max-width : 1300px)").matches;
+
         gsap.to(detailsContainer,{
             opacity: 0,
             delay: 0.3,
@@ -176,14 +184,15 @@ export const countryDetails = {
 
         gsap.to(detailsTXT,{
             duration : 0.6,
-            x : window.innerWidth - detailsTXT.offsetLeft,
+            x : desktop ? window.innerWidth - detailsTXT.offsetLeft : 0,
+            y : desktop ? 0 : window.innerHeight - detailsTXT.offsetTop,
             ease : 'power3.inOut'
         });
 
         gsap.to(detailsIMG,{
             duration : 0.6,
-            y : window.innerHeight - detailsIMG.offsetTop,
-            x : 0,
+            y : desktop ? window.innerHeight - detailsIMG.offsetTop : 0,
+            x : desktop ? 0 : window.innerWidth - detailsIMG.offsetLeft,
             ease : 'power3.inOut'
         });
 
