@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "serve": "rimraf temp && parcel src/index.html --dist-dir temp",
-    "build": "rimraf docs && parcel build src/index.html --dist-dir docs"
+    "build": "rimraf docs && parcel build src/index.html --dist-dir docs --public-url ."
   },
   "repository": {
     "type": "git",
